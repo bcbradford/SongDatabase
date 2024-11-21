@@ -5,11 +5,15 @@ import yaml
 
 def init_config() -> dict:
     package_path = os.path.dirname(os.path.dirname(__file__)) #src
-    project_path = os.path.dirname(package_path) # SongDatabase
+
+    if package_path == 'src':
+        project_path = os.path.dirname(package_path) # SongDatabase
+    else: project_path = package_path
+
     config_path = os.path.join(project_path, "config.yml")
 
     if not os.path.exists(config_path):
-        msg = f"Path: {os.path.join(SongDatabase, config_path)} not found"
+        msg = f"Path: {os.path.join(project_path, config_path)} not found"
         raise FileNotFoundError(msg)
 
     with open(config_path, 'r') as file:
