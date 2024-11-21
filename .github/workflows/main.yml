@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    if: "!contains(github.event.head_commit.message, 'Add built artifacts')"
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -52,14 +53,11 @@ jobs:
             src/songdatabase/app.py
         working-directory: ${{ github.workspace }}
         
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: songdatabase-${{ matrix.os }}
-          path: ${{ github.workspace }}/dist/${{ matrix.os }}
-          
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: songdatabase-${{ matrix.os }}
-          path: ${{ github.workspace }}/dist/${{ matrix.os }}
+      - name: Commit and Push Artifacts
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          cp -r dist/* .
+          git add .
+          git commit -m "Add built artifacts for ${{ matrix.os }}"
+          git push origin main
