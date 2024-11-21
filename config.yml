@@ -1,15 +1,25 @@
-debug: False
+debug: True
 db_path: 'database'
 log_path: 'log'
 database: 'database.sqlite'
 
 logger:
 
-  name: 'AppLogger'
-  info_log: 'info.log'
-  error_log: 'error.log'
-  format: '[%(asctime)s] %(levelname)s - %(message)s'
+  window_logger:
+    name: 'WindowLogger'
+    info_log: 'window_info.log'
+    error_log: 'window_error.log'
+    format: '[%(asctime)s] %(levelname)s - %(message)s'
 
+  db_logger:
+    name: 'DatabaseLogger'
+    info_log: 'db_info.log'
+    error_log: 'db_error.log'
+    format: '[%(asctime)s] %(levelname)s = %(message)s'
+
+main_window:
+  title: 'Song Database'
+    
 database_entities:
 
   category_table:
@@ -37,7 +47,7 @@ database_entities:
       id: ['ArtistID', 'INTEGER', 'PRIMARY KEY']
       name: ['ArtistName', 'TEXT', 'UNIQUE']
 
-database_relationships:
+database_relations:
 
   isin_table:
     name: 'IsIn'

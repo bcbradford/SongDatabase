@@ -18,6 +18,11 @@ def init_config() -> dict:
     if not config:
         raise ValueError(f"Failed to load configuration file.")
 
+    _set_file_paths(config, project_path)
+
+    return config
+
+def _set_file_paths(config, project_path) -> None:
     # Set Database Path
     database_path = config['db_path']
     database = config['database']
@@ -26,13 +31,8 @@ def init_config() -> dict:
     # Set Logger Paths
     log_path = config['log_path']
 
-    info_log = config['logger']['info_log']
-    info_path = os.path.join(project_path, log_path, info_log)
-    config['logger']['info_log'] = info_path
-
-    error_log = config['logger']['error_log']
-    error_path = os.path.join(project_path, log_path, error_log)
-    config['logger']['error_log'] = error_path
-
-    return config
-
+    for _, logger_dict in config['logger'].items():
+        info_log = logger_dict['info_log']
+        error_log = logger_dict['error_log']
+        logger_dict['info_log'] = os.path.join(project_path, log_path, info_log)
+        logger_dict['error_log'] = os.path.join(project_path, log_path, error_log)

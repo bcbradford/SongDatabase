@@ -12,9 +12,11 @@ aiosqlite = "^0.20.0"
 pyqt6 = "^6.7.1"
 pyyaml = "^6.0.2"
 
-
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
+
+[tool.poetry.scripts]
+songdatabase = "songdatabase.app:start"
 
 [build-system]
 requires = ["poetry-core"]
