@@ -11,12 +11,14 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            extension: bin
+          - os: windows-latest
+            extension: exe
+          - os: macos-latest
+            extension: app
         python-version: ["3.10"]
-        extension:
-          - bin
-          - exe
-          - app
 
     steps:
     - name: Checkout Code
@@ -48,6 +50,3 @@ jobs:
       with:
         name: songdatabase-${{ matrix.os }}
         path: dist/${{ matrix.os }}
-          
-      
-    
