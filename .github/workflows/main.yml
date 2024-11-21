@@ -41,7 +41,7 @@ jobs:
         run: |
           poetry run pyinstaller \
             --name songdatabase.${{ matrix.extension }} \
-            --distpath dist/${{ matrix.extension }} \
+            --distpath dist/${{ matrix.os }} \
             --add-data "log:log" \
             --add-data "database:database" \
             --add-data "config.yml:." \
