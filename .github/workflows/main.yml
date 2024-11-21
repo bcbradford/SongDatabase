@@ -42,7 +42,7 @@ jobs:
           --distpath dist/${{ matrix.extension }} \
           --add-data "log:log" \
           --add-data "database:database" \
-          --add-data "config.yml:."
+          --add-data "config.yml:." \
           src/songdatabase/app.py
       working-directory: ${{ github.workspace }}
 
