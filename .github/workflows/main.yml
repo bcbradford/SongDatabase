@@ -38,11 +38,6 @@ jobs:
             pip install poetry
             poetry install
 
-      Step 4:
-        - name: Create Distribution Directory
-          run: mkdir -p dist/${{ matrix.os }}
-          working-directory: ${{ github.workspace }}
-
       Step 5:
         - name: Package with PyInstaller
           run: |
