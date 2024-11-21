@@ -59,7 +59,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           cp -r dist/* .
           git add .
-          git commit -m "Add built artifacts for ${{ matrix.os }}"
+          git commit -m "Add built artifacts for os: ${{ matrix.os }}"
           git push origin artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
