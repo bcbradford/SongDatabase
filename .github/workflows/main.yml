@@ -46,7 +46,7 @@ jobs:
             --add-data "database:database" \
             --add-data "config.yml:." \
             src/songdatabase/app.py
-          working-directory: ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
