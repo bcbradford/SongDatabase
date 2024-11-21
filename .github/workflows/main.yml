@@ -61,3 +61,5 @@ jobs:
           git add .
           git commit -m "Add built artifacts for ${{ matrix.os }}"
           git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
