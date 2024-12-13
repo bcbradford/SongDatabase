@@ -1,2 +1,2 @@
-import songdatabase.errors.app_errors
-import songdatabase_errors.database_errors
+from songdatabase.errors.app_error import *
+from songdatabase.errors.database_error import *
