@@ -31,9 +31,10 @@ class Database():
         if params is None: params = ()
 
         try:
-            with self._connection.cursor() as cursor:
-                cursor.execute(query, params)
+            cursor = self._connection.cursor()
+            cursor.execute(query, params)
             self._connection.commit()
+            cursor.close()
         except Exception as e:
             self._raise_query_error(query, params, e)
 
@@ -42,9 +43,10 @@ class Database():
         if params is None: params = ()
 
         try:
-            with self.connection.cursor() as cursor:
-                cursor.execute(query, params)
-                results = cursor.fetchall()
+            cursor = self._connection.cursor()
+            cursor.execute(query, params)
+            results = cursor.fetchall()
+            cursor.close()
             return results
         except Exception as e:
             self._raise_query_error(query, params, e)
@@ -52,6 +54,7 @@ class Database():
     def _raise_query_error(self, query, params, e):
         desc = "Failed to execute query."
         logger_output = f"{query}\nFailed to execute with params: {params}\nException: {e}"
+        self._logger.error(logger_output)
         raise DatabaseQueryError(desc, logger_output)
 
 
