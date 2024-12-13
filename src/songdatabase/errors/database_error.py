@@ -13,14 +13,14 @@ class DatabaseError(Exception):
     def get_logger_output(self):
         return self._logger_output
 
-class DatabaseInitError(Exception):
+class DatabaseInitError(DatabaseError):
     def __init__(self, description, logger_output=None):
         super().__init__("DatabaseInitError", description, logger_output)
 
-class DatabaseConnectionError(Exception):
+class DatabaseConnectionError(DatabaseError):
     def __init__(self, description, logger_output=None):
         super().__init__("DatabaseConnectionError", description, logger_output)
 
-class DatabaseQueryError(Exception):
+class DatabaseQueryError(DatabaseError):
     def __init__(self, description, logger_output=None):
         super().__init__("DatabaseQueryError", description, logger_output)

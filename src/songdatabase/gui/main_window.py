@@ -10,8 +10,7 @@ class MainWindow(QMainWindow):
     def __init__(self, config: dict, logger: "logger"):
         super().__init__()
         self._window_config = config['main_window']
-        self._entities_config = config['database_entities']
-        self._relations_config = config['database_relations']
+        self._tables_config = config['database_tables']
         self._logger = logger
 
         self._init_window()

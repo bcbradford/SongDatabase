@@ -5,10 +5,11 @@ import yaml
 
 def init_config() -> dict:
     package_path = os.path.dirname(os.path.dirname(__file__)) #src
-
-    if package_path == 'src':
+    project_path = os.path.dirname(package_path)
+    '''if (os.path.basename(os.getcwd()) == 'src'):
         project_path = os.path.dirname(package_path) # SongDatabase
     else: project_path = package_path
+    '''
 
     config_path = os.path.join(project_path, "config.yml")
 

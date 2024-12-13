@@ -21,7 +21,3 @@ class AppLoadError(AppError):
 class InputValidationError(AppError):
     def __init__(self, description, logger_output=None):
         super().__init__("InputValidationError", description, logger_output)
-
-class UnhandledAppError(AppError):
-    def __init__(self, descriptioon, logger_output=None):
-        super().__init__("UnhandledAppError", description, logger_output)

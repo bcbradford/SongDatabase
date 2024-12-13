@@ -20,53 +20,51 @@ logger:
 main_window:
   title: 'Song Database'
     
-database_entities:
+database_tables:
 
   category_table:
     name: 'Category'
     columns:
-      id: ['CategoryID', 'INTEGER', 'PRIMARY KEY'] 
-      name: ['CategoryName', 'TEXT', 'NOT NULL']
+      id: ['CategoryID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT'] 
+      name: ['CategoryName', 'TEXT', 'NOT NULL', 'UNIQUE']
   
   song_table:
     name: 'Song'
     columns:
-      id: ['SongID', 'INTEGER', 'PRIMARY KEY']
+      id: ['SongID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT']
       title: ['Title', 'TEXT', 'NOT NULL']
   
   album_table:
     name: 'Album'
     columns:
-      id: ['AlbumID', 'INTEGER', 'PRIMARY KEY']
+      id: ['AlbumID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT']
       title: ['Title', 'TEXT', 'NOT NULL']
       year: ['Year', 'TEXT', 'NOT NULL']
   
   artist_table:
     name: 'Artist'
     columns:
-      id: ['ArtistID', 'INTEGER', 'PRIMARY KEY']
-      name: ['ArtistName', 'TEXT', 'UNIQUE']
-
-database_relations:
+      id: ['ArtistID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT']
+      name: ['ArtistName', 'TEXT', 'NOT NULL', 'UNIQUE']
 
   isin_table:
     name: 'IsIn'
-    foreign_keys: ['CategoryID', 'SongID']
     columns:
-      category_id: ['CategoryID', 'INTEGER', 'NOT NULL']
-      song_id: ['SongID', 'INTEGER', 'NOT NULL']
+      category_id: ['CategoryID', 'INTEGER', 'NOT NULL', 'REFERENCES Category(id)']
+      song_id: ['SongID', 'INTEGER', 'NOT NULL', 'REFERENCES Song(id)']
+      primary_keys: ['PRIMARY KEY (CategoryID, SongID)']
   
   plays_table:
     name: 'Plays'
-    foreign_keys: ['SongID', 'ArtistID']
     columns:
-      song_id: ['SongID', 'INTEGER', 'NOT NULL']
-      artist_id: ['ArtistID', 'INTEGER', 'NOT NULL']
+      song_id: ['SongID', 'INTEGER', 'NOT NULL', 'REFERENCES Song(id)']
+      artist_id: ['ArtistID', 'INTEGER', 'NOT NULL', 'REFERENCES Artist(id)']
+      primary_keys: ['PRIMARY KEY (SongID, ArtistID)']
   
   ison_table:
     name: 'IsOn'
-    foregin_keys: ['SongID', 'AlbumID']
     columns:
-      song_id: ['SongID', 'INTEGER', 'NOT NULL']
-      album_id: ['AlbumID', 'INTEGER', 'NOT NULL']
+      song_id: ['SongID', 'INTEGER', 'NOT NULL', 'REFERENCES Song(id)']
+      album_id: ['AlbumID', 'INTEGER', 'NOT NULL', 'REFERENCES Album(id)']
+      primary_keys: ['PRIMARY KEY (SongID, AlbumID)']
 
