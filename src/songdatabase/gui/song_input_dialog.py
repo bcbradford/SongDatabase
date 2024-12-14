@@ -14,18 +14,18 @@ class SongInputDialog(QDialog):
         self._create_widgets(table_list)
 
     def _create_widgets(self, table_list):
-        x = 10
+        x = 30
         y = 30
         for table in table_list:
             query = self._get_query(table)
             if query is None: continue
 
-            label = QLabel(table)
+            label = QLabel(f"{table}: ")
             label.setParent(self)
             label.setStyleSheet("font-size: 18px;")
-            label.setGeometry(x, y, 75, 30)
+            label.setGeometry(x, y, 120, 30)
             
-            x += 70
+            x += 110
 
             combo_box = QComboBox()
             combo_box.setParent(self)
@@ -41,10 +41,10 @@ class SongInputDialog(QDialog):
             
             self._widgets[table] = combo_box
             y += 40
-            x = 10
+            x = 30
 
         self._submit_button = QPushButton("Submit", self)
-        self._submit_button.setGeometry(190, 170, 100, 30)
+        self._submit_button.setGeometry(30, 150, 100, 30)
         self._submit_button.setStyleSheet("font-size: 18px;")
         self._submit_button.clicked.connect(self._submit_clicked)
 

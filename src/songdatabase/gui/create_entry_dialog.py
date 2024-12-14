@@ -12,7 +12,7 @@ from songdatabase.gui.input_dialog import init_input_dialog
 class CreateEntryDialog(QDialog):
     def __init__(self, db):
         super().__init__()
-        self.setWindowTitle("Table View")
+        self.setWindowTitle("Create Entry")
         self.resize(460, 460)
         self._db = db
         self._create_widgets()

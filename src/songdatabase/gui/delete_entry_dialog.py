@@ -11,7 +11,7 @@ from songdatabase.errors.database_error import DatabaseQueryError
 class DeleteEntryDialog(QDialog):
     def __init__(self, db):
         super().__init__()
-        self.setWindowTitle("Table View")
+        self.setWindowTitle("Delete Entry")
         self.resize(460, 460)
         self._db = db
         self._create_widgets()

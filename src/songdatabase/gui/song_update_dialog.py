@@ -12,7 +12,7 @@ from songdatabase.gui.song_input_dialog import init_song_input_dialog
 class SongUpdateDialog(QDialog):
     def __init__(self, db):
         super().__init__()
-        self.setWindowTitle("Table View")
+        self.setWindowTitle("Song Update")
         self.resize(460, 460)
         self._db = db
         self._create_widgets()
@@ -23,7 +23,7 @@ class SongUpdateDialog(QDialog):
         self._create_table_view()
 
     def _create_combo_box(self):
-        self._table_label = QLabel("Table: ")
+        self._table_label = QLabel("Song: ")
         self._table_label.setParent(self)
         self._table_label.setStyleSheet("font-size: 18px;")
         self._table_label.setGeometry(10, 30, 75, 30)

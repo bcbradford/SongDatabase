@@ -66,6 +66,73 @@ cd src/songdatabase/
 python3 app.py
 ```
 
+## Instructions
+
+### Create Entities
+
+To create the entities for the database:
+
+1. Select the Database Menu
+2. Select Create Entry
+3. Select the entity type form the table combo box
+4. Press the submit button.
+5. A dialog window will be displayed asking for user input.
+6. Input the value for the entity and press submit.
+
+The entity will be created
+
+### Delete Entities
+
+To delete the entities in the database:
+
+1. Select the Database Menu
+2. Select Delete Entry
+3. Select the entity type in the table combo box.
+
+The delete combo box will be automatically populated will entities
+that can be deleted.
+
+4. Select the entity to delete in the delete combo box.
+5. Press Submit
+
+You will be prompted if you want to delete the entity.
+If you press yes, the entity will be deleted.
+
+### Update Entities
+
+To update the entities in the database:
+
+1. Select the Database Menu
+2. Select Update Entry
+3. Select the entity type in the table combo box.
+
+This will automatically populate the update combo box with database entities.
+
+4. Select the entity to update in the table combo box.
+5. Press submit
+
+You will be prompted to input the updated field in a new dialog window.
+Pressing submit with a new title to update the entity, or the x in the window
+to cancel.
+
+### Update Songs
+
+To update the songs in the database, ensure you have
+the song already created in the database. Then:
+
+1. Select the Database Menu
+2. Select the song from the combo box and press submit
+
+You will be prompted to select the Artist, Category, and Album
+to assign to the song. These fields are automatically populated
+with the existing entities in the database.
+
+3. Select the value of each entity from their combo boxes.
+4. Press submit.
+
+The song will be updated with its respective artist, category, and
+album.
+
 ## License
 
 ### SongDatabase
