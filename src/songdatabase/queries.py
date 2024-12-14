@@ -2,14 +2,14 @@
 
 def get_all_fields(order_table = None) -> str:
     query = """
-        SELECT c.CategoryName, s.Title, art.Name, alb.Title, alb.Year
-        FROM Category c, Song s, Artist art, Album alb, IsIn iin, IsOn ion, Plays p
-        WHERE c.CategoryID = iin.CategoryID
-        AND iin.SongID = s.SongID
-        AND p.SongID = s.SongID
-        AND p.ArtistID = art.ArtistID
-        AND s.SongID = ion.SongID
-        AND ion.AlbumID = alb.AlbumID
+        SELECT s.Title, art.Name, alb.Title, c.CategoryName
+        FROM Song s
+        LEFT JOIN Plays p ON s.SongID = p.SongID
+        LEFT JOIN Artist art ON art.ArtistID = p.ArtistID
+        LEFT JOIN IsOn ion ON s.SongID = ion.SongID
+        LEFT JOIN Album alb ON alb.AlbumID = ion.AlbumID
+        LEFT JOIN IsIn iin ON s.SongID = iin.SongID
+        LEFT JOIN Category c ON c.CategoryID = iin.CategoryID
         """
 
     if order_table is None: return query + ";"
@@ -38,8 +38,8 @@ def get_all_artists() -> str:
     query = """
         SELECT a.Name, COUNT(s.SongID) as Songs
         FROM Artist a
-        JOIN Plays p ON a.ArtistID = p.ArtistID
-        JOIN Song s ON s.SongID = p.SongID
+        LEFT JOIN Plays p ON a.ArtistID = p.ArtistID
+        LEFT JOIN Song s ON s.SongID = p.SongID
         GROUP BY a.Name;
         """
     return query
@@ -59,7 +59,56 @@ def get_artist_songs() -> str:
         """
     return query
 
-def update_artist_song() -> str:
+def update_song() -> str:
+    # params (NewSongTitle, OldSongTitle)
+    query = """
+        UPDATE Song
+        SET Title = ?
+        WHERE Title = ?;
+        """
+
+    return query
+
+def update_artist() -> str:
+    # params (NewArtistName, OldArtistName)
+    query = """
+        UPDATE Artist
+        SET Name = ?
+        WHERE Name = ?;
+        """
+
+    return query
+
+def update_category() -> str:
+    # params (NewCategoryName, OldCategoryName)
+    query = """
+        UPDATE Category
+        SET CategoryName = ?
+        WHERE CategoryName = ?;
+        """
+
+    return query
+
+def update_album_title() -> str:
+    # params (NewAlbumTitle, OldAlbumTitle)
+    query = """
+        UPDATE Album
+        SET Title = ?
+        WHERE Title = ?;
+        """
+
+    return query
+
+def update_album_year() -> str:
+    # params (NewAlbumYear, AlbumTitle)
+    query = """
+        UPDATE Album
+        SET Year = ?
+        WHERE Title = ?;
+        """
+    return query
+
+def update_song_artist() -> str:
     # params (ArtistName, SongTitle)
     query = """
         INSERT INTO Plays (ArtistID, SongID)

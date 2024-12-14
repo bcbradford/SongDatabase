@@ -16,7 +16,6 @@ class TableDialog(QDialog):
     
     def _create_widgets(self):
         self._create_combo_box()
-        self._create_submit_button()
         self._create_table_view()
 
     def _create_combo_box(self):
@@ -38,12 +37,8 @@ class TableDialog(QDialog):
         self._table_cb.setEditable(False)
         self._table_cb.setStyleSheet("font-size: 18px;")
         self._table_cb.setGeometry(90, 30, 250, 30)
-
-    def _create_submit_button(self):
-        self._submit_button = QPushButton("Submit", self)
-        self._submit_button.setGeometry(350, 30, 100, 30)
-        self._submit_button.setStyleSheet("font-size: 18px;")
-        self._submit_button.clicked.connect(self._submit_clicked)
+        self._table_cb.setCurrentIndex(-1)
+        self._table_cb.currentIndexChanged.connect(self._cb_index_changed)
 
     def _create_table_view(self):
         self._model = QStandardItemModel(0, 0)
@@ -54,7 +49,7 @@ class TableDialog(QDialog):
         self._table_view.setStyleSheet("font-size: 18px;")
         self._table_view.horizontalHeader().setMinimumSectionSize(200)
 
-    def _submit_clicked(self):
+    def _cb_index_changed(self):
         self._update_table_view()
 
     def _update_table_view(self):
