@@ -1,4 +1,4 @@
-# PyEmail Assistant
+# SongDatabase
 
 **Version:** 0.1
 
