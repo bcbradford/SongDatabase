@@ -12,6 +12,8 @@ from songdatabase.errors.app_error import *
 from PyQt6.QtWidgets import QApplication
 
 def start():
+    print("Loading App")
+
     config = init_config()
     loggers = init_logger(config)
 
@@ -23,9 +25,11 @@ def start():
         return
 
     app = QApplication(sys.argv)
-    main_window = init_main_window(app, config, loggers['window_logger'])
-    main_window.show()
+    main_window = init_main_window(app, config, loggers['window_logger'], db)
+    
+    if main_window is None: return
 
+    main_window.show()
     sys.exit(app.exec())
 
 if __name__ == "__main__":

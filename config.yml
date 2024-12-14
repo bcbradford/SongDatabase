@@ -24,18 +24,21 @@ database_tables:
 
   category_table:
     name: 'Category'
+    type: 'entity'
     columns:
       id: ['CategoryID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT'] 
       name: ['CategoryName', 'TEXT', 'NOT NULL', 'UNIQUE']
   
   song_table:
     name: 'Song'
+    type: 'entity'
     columns:
       id: ['SongID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT']
       title: ['Title', 'TEXT', 'NOT NULL']
   
   album_table:
     name: 'Album'
+    type: 'entity'
     columns:
       id: ['AlbumID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT']
       title: ['Title', 'TEXT', 'NOT NULL']
@@ -43,12 +46,14 @@ database_tables:
   
   artist_table:
     name: 'Artist'
+    type: 'entity'
     columns:
       id: ['ArtistID', 'INTEGER', 'PRIMARY KEY', 'AUTOINCREMENT']
-      name: ['ArtistName', 'TEXT', 'NOT NULL', 'UNIQUE']
+      name: ['Name', 'TEXT', 'NOT NULL', 'UNIQUE']
 
   isin_table:
     name: 'IsIn'
+    type: 'relation'
     columns:
       category_id: ['CategoryID', 'INTEGER', 'NOT NULL', 'REFERENCES Category(id)']
       song_id: ['SongID', 'INTEGER', 'NOT NULL', 'REFERENCES Song(id)']
@@ -56,6 +61,7 @@ database_tables:
   
   plays_table:
     name: 'Plays'
+    type: 'relation'
     columns:
       song_id: ['SongID', 'INTEGER', 'NOT NULL', 'REFERENCES Song(id)']
       artist_id: ['ArtistID', 'INTEGER', 'NOT NULL', 'REFERENCES Artist(id)']
@@ -63,6 +69,7 @@ database_tables:
   
   ison_table:
     name: 'IsOn'
+    type: 'relation'
     columns:
       song_id: ['SongID', 'INTEGER', 'NOT NULL', 'REFERENCES Song(id)']
       album_id: ['AlbumID', 'INTEGER', 'NOT NULL', 'REFERENCES Album(id)']
