@@ -181,33 +181,83 @@ def create_new_album() -> str:
 
 def delete_song() -> str:
     # params (Title)
-    query = """
+    queries = [
+        """
+        DELETE FROM IsIn WHERE SongID = (
+            SELECT SongID
+            FROM Song WHERE title = ?
+        );
+        """,
+
+        """
+        DELETE FROM IsOn WHERE SongID = (
+            SELECT SongID
+            FROM Song WHERE title = ?
+        );
+        """,
+
+        """
+        DELETE FROM Plays WHERE SongID = (
+            SELECT SongID
+            FROM Song WHERE title = ?
+        );
+        """,
+
+        """
         DELETE FROM Song WHERE Title = ?;
         """
+    ]
 
-    return query
+    return queries
 
 def delete_album() -> str:
     # params (AlbumTitle)
-    query = """
+    queries = [
+        """
+        DELETE FROM IsOn WHERE AlbumID = (
+            SELECT AlbumID
+            FROM Album Where Title = ?
+        );
+        """,
+
+        """
         DELETE FROM Album WHERE Title = ?;
         """
+    ]
 
-    return query
+    return queries
 
 def delete_artist() -> str:
     # params (ArtistName)
-    query = """
+    queries = [
+        """
+        DELETE FROM Plays WHERE ArtistID = (
+            SELECT ArtistID
+            FROM Artist WHERE Name = ?
+        );
+        """,
+
+        """
         DELETE FROM Artist WHERE Name = ?;
         """
+    ]
 
-    return query
+    return queries
 
 def delete_category() -> str:
     # params (CategoryName)
-    query = """
+    queries = [
+        """
+        DELETE FROM IsIn WHERE CategoryID = (
+            SELECT CategoryID
+            FROM Category WHERE CategoryName = ?
+        );
+        """,
+        
+        """
         DELETE FROM Category WHERE CategoryName = ?;
         """
+    ]
 
-    return query
+    return queries
 

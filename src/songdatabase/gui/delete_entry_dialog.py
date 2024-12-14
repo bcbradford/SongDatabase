@@ -109,18 +109,19 @@ class DeleteEntryDialog(QDialog):
 
         match (table):
             case 'Song':
-                query = qs.delete_song()
+                queries = qs.delete_song()
             case 'Artist':
-                query = qs.delete_artist()
+                queries = qs.delete_artist()
             case 'Category':
-                query = qs.delete_category()
+                queries = qs.delete_category()
             case 'Album':
-                query = qs.delete_album()
+                queries = qs.delete_album()
             case _:
                 self._display_message("Error", f"Invalid table {table}")
                 return
 
-        self._db.execute(query, (item_string,))
+        for query in queries:
+            self._db.execute(query, (item_string,))
 
     def _get_query(self):
         table_name = self._table_cb.currentText()
